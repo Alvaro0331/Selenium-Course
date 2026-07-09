@@ -1,5 +1,5 @@
-from selenium import webdriver  # type: ignore
-from selenium.webdriver.common.by import By # type: ignore
+from selenium import webdriver
+from selenium.webdriver.common.by import By
 
 #Start the session
 driver= webdriver.Edge()
