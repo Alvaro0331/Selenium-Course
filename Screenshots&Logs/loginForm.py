@@ -13,24 +13,26 @@ def main():
     #Find the username field using XPATH and enter the correct username
     usernameField=driver.find_element(by=By.XPATH, value="//*[@id='username']")
     usernameField.send_keys("tomsmith")
-    time.sleep(1)
     #Find the password field using XPATH and enter the correct password
     passwordField=driver.find_element(by=By.XPATH, value="//*[@id='password']")
     passwordField.send_keys("SuperSecretPassword")
-    time.sleep(1)
     #Find the login button using XPATH and click it
     loginButton=driver.find_element(by=By.XPATH, value="//*[@id='login']/button")
     loginButton.click()
-    time.sleep(2)
+    time.sleep(1)
 
     #Check if login was successful
     try:
-        successMessage=driver.find_element(by=By.CLASS_NAME, value="flash success")
+        successMessage=driver.find_element(by=By.CSS_SELECTOR, value=".flash.success")
         logging.info("Login successful.")
+        #Take screenshot of the successful login
+        driver.save_screenshot("./Screenshots&Logs/login_success.png")
     except Exception as e:
         logging.error("Login failed")
+        #Take screenshot of the failed login
+        driver.save_screenshot("./Screenshots&Logs/login_failed.png")
 
-
+    driver.quit()
 
 if __name__ == "__main__":
     main()
