@@ -1,6 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-
+import csv
 
 def main():
     driver = webdriver.Edge()
@@ -43,8 +43,11 @@ def main():
         csvContent="Title,Price\n"
         for i in range(len(titles)):
             csvContent += f"{titles[i]},{prices[i]}\n"
-        with open("./WebScraping/scraped_data.csv", "w") as file:
-            file.write(csvContent)
+        with open("./WebScraping/scraped_data.csv", "w", newline="", encoding="utf-8") as file:
+            writer = csv.writer(file)
+            writer.writerow(["Title", "Price"])
+            for i in range(len(titles)):
+                writer.writerow([titles[i], prices[i]])
 
     except Exception as e:
         print(f"An error occurred: {e}")
